@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header/Header';
-import { ProductCard } from './components/ProductCard/ProductCard';
+import { ProductShowcase } from './components/ProductShowcase/ProductShowcase';
 import { ProductModal } from './components/ProductModal/ProductModal';
 import { fetchProducts } from './services/productService';
 import type { Product } from './types/product';
-import './App.scss';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,14 +16,12 @@ function App() {
   return (
     <>
       <Header />
-      <main className="showcase">
-        <ul className="showcase__list">
-          {products.map((product, index) => (
-            <li key={index}>
-              <ProductCard product={product} onSelect={setSelectedProduct} />
-            </li>
-          ))}
-        </ul>
+      <main>
+        <ProductShowcase
+          title="Produtos relacionados"
+          products={products}
+          onSelect={setSelectedProduct}
+        />
       </main>
 
       {selectedProduct && (

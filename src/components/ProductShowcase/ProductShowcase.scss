@@ -1,0 +1,49 @@
+@use '../../styles/variables' as *;
+
+.showcase {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+
+  &__title {
+    margin: 0 0 $spacing-lg;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-primary;
+  }
+
+  &__carousel {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__list {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-lg;
+
+    @media (max-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__arrow {
+    border: 0;
+    background: transparent;
+    font-size: 48px;
+    line-height: 1;
+    color: $color-text;
+
+    &:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+  }
+}
