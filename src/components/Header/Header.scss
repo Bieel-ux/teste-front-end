@@ -1,0 +1,76 @@
+@use '../../styles/variables' as *;
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.header {
+  &__top {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    padding: 6px $spacing-md;
+    background: #f5f5f5;
+    font-size: 12px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__main {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $spacing-md $spacing-lg;
+  }
+
+  &__logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-text;
+    text-decoration: none;
+  }
+
+  &__search {
+    flex: 1;
+
+    input {
+      width: 100%;
+      padding: 10px $spacing-md;
+      border: 1px solid $color-border;
+      border-radius: 20px;
+      font-family: inherit;
+    }
+  }
+
+  &__actions button {
+    border: 0;
+    background: transparent;
+    font-size: 20px;
+  }
+
+  &__nav {
+    border-top: 1px solid $color-border;
+
+    ul {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-lg;
+      padding: $spacing-sm;
+    }
+
+    a {
+      font-size: 13px;
+      color: $color-text;
+      text-decoration: none;
+    }
+  }
+}
