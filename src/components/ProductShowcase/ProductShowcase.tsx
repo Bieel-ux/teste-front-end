@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import type { Product } from '../../types/product';
+import { useVisibleCount } from '../../hooks/useVisibleCount';
 import { ProductCard } from '../ProductCard/ProductCard';
 import './ProductShowcase.scss';
 
-const VISIBLE = 4;
 const TABS = ['Celular', 'Acessórios', 'Tablets', 'Notebooks', 'TVs', 'Ver todos'];
 
 interface ProductShowcaseProps {
@@ -15,9 +15,11 @@ interface ProductShowcaseProps {
 export function ProductShowcase({ title, products, onSelect }: ProductShowcaseProps) {
   const [start, setStart] = useState(0);
   const [activeTab, setActiveTab] = useState(TABS[0]);
+  const visibleCount = useVisibleCount();
 
-  const maxStart = Math.max(0, products.length - VISIBLE);
-  const visibleProducts = products.slice(start, start + VISIBLE);
+  const maxStart = Math.max(0, products.length - visibleCount);
+  const safeStart = Math.min(start, maxStart);
+  const visibleProducts = products.slice(safeStart, safeStart + visibleCount);
 
   return (
     <section className="showcase">
@@ -48,15 +50,15 @@ export function ProductShowcase({ title, products, onSelect }: ProductShowcasePr
           type="button"
           className="showcase__arrow"
           aria-label="Anterior"
-          disabled={start === 0}
-          onClick={() => setStart(Math.max(0, start - 1))}
+          disabled={safeStart === 0}
+          onClick={() => setStart(Math.max(0, safeStart - 1))}
         >
           ‹
         </button>
 
         <ul className="showcase__list">
           {visibleProducts.map((product, index) => (
-            <li key={start + index}>
+            <li key={safeStart + index}>
               <ProductCard product={product} onSelect={onSelect} />
             </li>
           ))}
@@ -66,8 +68,8 @@ export function ProductShowcase({ title, products, onSelect }: ProductShowcasePr
           type="button"
           className="showcase__arrow"
           aria-label="Próximo"
-          disabled={start === maxStart}
-          onClick={() => setStart(Math.min(maxStart, start + 1))}
+          disabled={safeStart === maxStart}
+          onClick={() => setStart(Math.min(maxStart, safeStart + 1))}
         >
           ›
         </button>
