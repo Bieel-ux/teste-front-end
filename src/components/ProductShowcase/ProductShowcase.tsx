@@ -4,6 +4,7 @@ import { ProductCard } from '../ProductCard/ProductCard';
 import './ProductShowcase.scss';
 
 const VISIBLE = 4;
+const TABS = ['Celular', 'Acessórios', 'Tablets', 'Notebooks', 'TVs', 'Ver todos'];
 
 interface ProductShowcaseProps {
   title: string;
@@ -13,6 +14,7 @@ interface ProductShowcaseProps {
 
 export function ProductShowcase({ title, products, onSelect }: ProductShowcaseProps) {
   const [start, setStart] = useState(0);
+  const [activeTab, setActiveTab] = useState(TABS[0]);
 
   const maxStart = Math.max(0, products.length - VISIBLE);
   const visibleProducts = products.slice(start, start + VISIBLE);
@@ -20,6 +22,26 @@ export function ProductShowcase({ title, products, onSelect }: ProductShowcasePr
   return (
     <section className="showcase">
       <h2 className="showcase__title">{title}</h2>
+
+      <ul className="showcase__tabs" role="tablist">
+        {TABS.map((tab) => (
+          <li key={tab} className="showcase__tab-item" role="presentation">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={tab === activeTab}
+              className={
+                tab === activeTab
+                  ? 'showcase__tab showcase__tab--active'
+                  : 'showcase__tab'
+              }
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          </li>
+        ))}
+      </ul>
 
       <div className="showcase__carousel">
         <button

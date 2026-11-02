@@ -6,11 +6,50 @@
   padding: $spacing-lg;
 
   &__title {
-    margin: 0 0 $spacing-lg;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin: 0 0 $spacing-md;
     font-size: 28px;
     font-weight: 700;
     color: $color-primary;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: $color-border;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    margin-bottom: $spacing-lg;
+    border: 1px solid $color-border;
+  }
+
+  &__tab-item {
+    flex: 1;
+
+    & + & {
+      border-left: 1px solid $color-border;
+    }
+  }
+
+  &__tab {
+    width: 100%;
+    padding: 12px $spacing-sm;
+    border: 0;
+    background: transparent;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $color-text;
+
+    &--active {
+      font-weight: 700;
+      color: $color-primary;
+    }
   }
 
   &__carousel {
